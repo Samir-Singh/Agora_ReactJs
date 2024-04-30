@@ -36,6 +36,8 @@ const LiveVideo = () => {
   const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
 
+  console.log("jksdfkj", { localCameraTrack, localMicrophoneTrack });
+
   useJoin(
     {
       appid: appId,
@@ -61,17 +63,24 @@ const LiveVideo = () => {
 
   console.log("kjdshkj", { remoteUsers, remoteCamera, remoteMic, audioTracks });
 
+  useEffect(() => {
+    return () => {
+      localCameraTrack?.close();
+      localMicrophoneTrack?.close();
+    };
+  }, []);
+
   return (
     <div className={style.main_div}>
       <div className={style.userVideo}>
         <h1>Local User</h1>
         <div className={style.local_video_div}>
           <LocalUser
-            // audioTrack={localMicrophoneTrack}
+            audioTrack={localMicrophoneTrack}
             videoTrack={localCameraTrack}
             cameraOn={cameraOn}
             micOn={micOn}
-            playAudio={micOn}
+            playAudio={false}
             playVideo={cameraOn}
             className={style.localUser_video}
             style={{
