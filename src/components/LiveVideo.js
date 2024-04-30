@@ -68,7 +68,7 @@ const LiveVideo = () => {
       localCameraTrack?.close();
       localMicrophoneTrack?.close();
     };
-  }, []);
+  }, [localMicrophoneTrack, localCameraTrack]);
 
   return (
     <div className={style.main_div}>
