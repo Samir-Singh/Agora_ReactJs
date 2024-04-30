@@ -59,7 +59,7 @@ const LiveVideo = () => {
     }
   }, [remoteUsers]);
 
-  console.log("kjdshkj", { remoteUsers, remoteCamera, remoteMic });
+  console.log("kjdshkj", { remoteUsers, remoteCamera, remoteMic, audioTracks });
 
   return (
     <div className={style.main_div}>
@@ -67,7 +67,7 @@ const LiveVideo = () => {
         <h1>Local User</h1>
         <div className={style.local_video_div}>
           <LocalUser
-            audioTrack={localMicrophoneTrack}
+            // audioTrack={localMicrophoneTrack}
             videoTrack={localCameraTrack}
             cameraOn={cameraOn}
             micOn={micOn}
