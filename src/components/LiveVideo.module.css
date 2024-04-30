@@ -1,0 +1,39 @@
+.main_div{
+    display: flex;
+    gap: 50px;
+}
+
+.userVideo{
+    width: 50%;
+    border: 1px solid red;
+    height: 90vh;
+}
+
+.localUser_video{
+    height: 400px;
+}
+
+.local_video_div{
+    position: relative;
+}
+
+.controls_div{
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.mic_icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    padding: 5px;
+    background-color: white;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 5px;
+}
