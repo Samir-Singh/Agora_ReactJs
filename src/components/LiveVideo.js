@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   LocalUser,
   RemoteUser,
@@ -12,22 +12,23 @@ import {
 } from "agora-rtc-react";
 import { FaMicrophone } from "react-icons/fa6";
 import { FaMicrophoneSlash } from "react-icons/fa";
-import { BsFillCameraVideoFill } from "react-icons/bs";
-import { BsFillCameraVideoOffFill } from "react-icons/bs";
+import {
+  BsFillCameraVideoFill,
+  BsFillCameraVideoOffFill,
+} from "react-icons/bs";
 import style from "./LiveVideo.module.css";
 
 const LiveVideo = () => {
   const appId = "001711e4544644e38215b13b01bfcd25";
   const { channelName } = useParams();
 
-  const [activeConnection, setActiveConnection] = useState(true);
+  const activeConnection = true;
+
   const [micOn, setMic] = useState(true);
   const [cameraOn, setCamera] = useState(true);
 
   const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
-
-  const navigate = useNavigate();
 
   useJoin(
     {
