@@ -1,43 +1,48 @@
-import { useState } from "react";
-import logo from "../logo.svg";
+import { useNavigate } from "react-router-dom";
 
-const ConnectForm = ({ connectToVideo }) => {
-  const [channelName, setChannelName] = useState("");
-  const [invalidInputMsg, setInvalidInputMsg] = useState("");
-
-  const handleConnect = (e) => {
-    // trim spaces
-    const trimmedChannelName = channelName.trim();
-
-    // validate input: make sure channelName is not empty
-    if (trimmedChannelName === "") {
-      e.preventDefault(); // keep the page from reloading on form submission
-      setInvalidInputMsg("Channel name can't be empty."); // show warning
-      setChannelName(""); // resets channel name value in case user entered blank spaces
-      return;
-    }
-
-    connectToVideo(trimmedChannelName);
-  };
-
+const ConnectForm = () => {
+  const navigate = useNavigate();
   return (
-    <form onSubmit={handleConnect}>
-      <img src={logo} className="logo" alt="logo" />
-      <div className="card">
-        <input
-          id="channelName"
-          type="text"
-          placeholder="Channel Name"
-          value={channelName}
-          onChange={(e) => {
-            setChannelName(e.target.value);
-            setInvalidInputMsg("");
-          }}
-        />
-        <button>Connect</button>
-        {invalidInputMsg && <p style={{ color: "red" }}> {invalidInputMsg} </p>}
-      </div>
-    </form>
+    <div className="flex flex-col items-center">
+      <h1 className="mb-4 mt-20 text-4xl font-extrabold leading-none tracking-tight text-gray-900">
+        <span className="text-black">NextJS</span> x{" "}
+        <span className="text-blue-500">Agora</span>
+      </h1>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const target = e.target;
+          const channel = target.channel.value;
+          navigate(`/channel/${channel}`);
+        }}
+      >
+        <div className="md:flex md:items-center mt-6">
+          <div>
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="inline-full-name"
+            >
+              Channel Name
+            </label>
+          </div>
+          <div>
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+              id="inline-full-name"
+              type="text"
+              name="channel"
+              placeholder="Enter channel name"
+              required
+            />
+          </div>
+        </div>
+        <div className="text-center">
+          <button className="inline-flex items-center justify-center px-5 py-3 mt-5 text-base font-medium text-center text-white bg-blue-400 rounded-lg hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -1,16 +1,11 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ConnectForm from "./components/ConnectForm";
-import LiveVideo from "./components/LiveVideo";
-
-import AgoraRTC, { AgoraRTCProvider, useRTCClient } from "agora-rtc-react";
 
 import "./App.css";
+import Call from "./components/Call";
 
 function App() {
   const navigate = useNavigate();
-  const agoraClient = useRTCClient(
-    AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })
-  );
 
   const handleConnect = (channelName) => {
     navigate(`/via/${channelName}`); // on form submit, navigate to new route
@@ -22,14 +17,7 @@ function App() {
         path="/"
         element={<ConnectForm connectToVideo={handleConnect} />}
       />
-      <Route
-        path="/via/:channelName"
-        element={
-          <AgoraRTCProvider client={agoraClient}>
-            <LiveVideo />
-          </AgoraRTCProvider>
-        }
-      />
+      <Route path="/channel/:channelName" element={<Call />} />
     </Routes>
   );
 }
