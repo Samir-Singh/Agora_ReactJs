@@ -3,19 +3,19 @@ import {
   LocalVideoTrack,
   RemoteUser,
   useJoin,
-  useLocalCameraTrack,
-  useLocalMicrophoneTrack,
   usePublish,
   useRemoteAudioTracks,
   useRemoteUsers,
 } from "agora-rtc-react";
 import { useParams } from "react-router-dom";
 
-const Videos = () => {
+const Videos = ({
+  isLoadingMic,
+  isLoadingCam,
+  localMicrophoneTrack,
+  localCameraTrack,
+}) => {
   const params = useParams();
-  const { isLoading: isLoadingMic, localMicrophoneTrack } =
-    useLocalMicrophoneTrack();
-  const { isLoading: isLoadingCam, localCameraTrack } = useLocalCameraTrack();
   const remoteUsers = useRemoteUsers();
   const { audioTracks } = useRemoteAudioTracks(remoteUsers);
 
